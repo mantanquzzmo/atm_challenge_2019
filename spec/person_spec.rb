@@ -6,15 +6,15 @@ describe Person do
   subject { described_class.new({name: 'Thomas'}) }
 
     it 'is expected to have a :name on initialize' do
-        expect(subject.name).not_to be nil
+      expect(subject.name).not_to be nil
     end
-
+    
     it 'is expected to raise an error if no name is set' do
-         expect { described_class.new }.to raise_error 'A name is required'
+      expect { described_class.new }.to raise_error 'A name is required'
     end
-
+    
     it 'is expected to have a :cash attribute with the value of 0 on initialize' do
-         expect(subject.cash).to eq 0
+      expect(subject.cash).to eq 0
     end
 
     it 'is expected to have a :account attribute' do
@@ -34,13 +34,12 @@ describe Person do
   end
   
   describe 'can manage funds if an account been created' do
-    let(:atm) { ATM.new}
+    let(:atm) { ATM.new }
     before { subject.create_account }
 
     it 'can deposite funds' do
       expect(subject.deposit(100)).to be_truthy
     end
-
 
     it 'funds are added to the account balance - deducted from cash' do
       subject.cash = 100
@@ -66,17 +65,13 @@ describe Person do
       expect(subject.account.balance).to be 0
       expect(subject.cash).to be 100
     end
-    
   end
 
   describe 'can not manage funds if no account been created' do
-   
     it 'can\'t deposit funds' do
       expect { subject.deposit(100) }.to raise_error(RuntimeError, 'No account present')
     end
   end
-
-
 end
 
 
